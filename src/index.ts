@@ -18,12 +18,12 @@ wss.on('connection', function connection(ws) {
   });
 
   duplex.on('data', async (data) => {
-    const splitData = data.split(' ');
+    const splitData: string[] = data.split(' ');
     const [command, ...args] = splitData;
-    const number = parseInt(args[0], 10);
+
     const action = findCommand(command);
     if (typeof action !== 'string') {
-      await action(number, duplex);
+      await action(args, duplex);
     } else {
       console.log(action);
     }
