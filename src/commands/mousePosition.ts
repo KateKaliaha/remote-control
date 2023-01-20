@@ -3,8 +3,8 @@ import { Duplex } from 'stream';
 
 export const mousePosition = async (args: string[], duplex: Duplex) => {
   const position = await mouse.getPosition();
-  const message = `Mouse position x:${position.x}px, y:${position.y}px`;
+  const message = `mouse_position ${position.x},${position.y}`;
 
-  duplex.write(`mouse_position `);
+  duplex.write(message);
   console.log(message);
 };
