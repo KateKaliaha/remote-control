@@ -1,10 +1,9 @@
-import { Button, mouse, Point, screen, straightTo } from '@nut-tree/nut-js';
+import { Button, mouse, Point, straightTo } from '@nut-tree/nut-js';
 import { Duplex } from 'stream';
 
 export const drawCircle = async (args: string[], duplex: Duplex) => {
   const radius = parseInt(args[0], 10);
   const position = await mouse.getPosition();
-  console.log(screen.width());
   const x = position.x;
   const y = position.y;
   await mouse.pressButton(Button.LEFT);
