@@ -6,7 +6,7 @@ export const makeScreen = async (_: string[], duplex: Duplex) => {
   const position = await mouse.getPosition();
   const size = 200;
   const x = position.x - 100;
-  const y = position.y + 100;
+  const y = position.y - 100;
   await screen.highlight(new Region(x, y, size, size));
   const img = await screen.grabRegion(new Region(x, y, size, size));
   const imgRgb = await img.toRGB();
