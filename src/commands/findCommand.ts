@@ -2,6 +2,7 @@ import { Duplex } from 'stream';
 import { drawCircle } from './drawCircle';
 import { DrawRectangle } from './drawRectangle';
 import { DrawSquare } from './drawSquare';
+import { makeScreen } from './makeScreen';
 import { mousePosition } from './mousePosition';
 import { moveDown } from './moveDown';
 import { moveLeft } from './moveLeft';
@@ -20,6 +21,7 @@ const commands: Record<
   draw_circle: drawCircle,
   draw_square: DrawSquare,
   draw_rectangle: DrawRectangle,
+  prnt_scrn: makeScreen,
 };
 
 export const findCommand = (
