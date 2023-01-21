@@ -14,5 +14,5 @@ export const drawCircle = async (args: string[], duplex: Duplex) => {
   }
   await mouse.releaseButton(Button.LEFT);
   duplex.write(`draw_circle_${radius}`);
-  console.log(`Circle is drawen, radius ${radius}px`);
+  console.log(`Circle is drawn, radius ${radius}px`);
 };
