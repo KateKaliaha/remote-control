@@ -31,7 +31,8 @@
     "wepack-cli": "^0.0.1-security"
   },
   "dependencies": {
-    "@nut-tree/nut-js": "^2.3.0",
+    "@nut-tree/nut-js": "^3.0.0",
+    "dotenv": "^16.0.3",
     "webpack-node-externals": "^3.0.0",
     "ws": "^8.8.0"
   }

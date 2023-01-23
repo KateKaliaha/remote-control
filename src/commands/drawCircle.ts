@@ -1,4 +1,4 @@
-import { Button, mouse, Point, straightTo } from '@nut-tree/nut-js';
+import { Button, mouse, Point, screen, straightTo } from '@nut-tree/nut-js';
 import { Duplex } from 'stream';
 
 export const drawCircle = async (args: string[], duplex: Duplex) => {
@@ -6,6 +6,13 @@ export const drawCircle = async (args: string[], duplex: Duplex) => {
   const position = await mouse.getPosition();
   const x = position.x;
   const y = position.y;
+  const heightScreen = await screen.height();
+  if (x - radius * 2 < 0 || y + radius > heightScreen || y - radius < 0) {
+    console.log(
+      `Sorry, mouse shouldn't go out of the screen! Move your mouse in other position`,
+    );
+    return;
+  }
   await mouse.pressButton(Button.LEFT);
   for (let i = 0; i <= 360; i++) {
     const height = Math.sin((2 * Math.PI * i) / 360) * radius + y;

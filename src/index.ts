@@ -1,9 +1,11 @@
 import { httpServer } from './http_server/index';
 import { createWebSocketStream, WebSocketServer } from 'ws';
 import { findCommand } from './commands/findCommand';
+import * as dotenv from 'dotenv';
+dotenv.config();
 
-const HTTP_PORT = 8181;
-const SERVER_PORT = 8080;
+const HTTP_PORT = process.env.HTTP_PORT ? +process.env.HTTP_PORT : 8181;
+const SERVER_PORT = process.env.WSS_PORT ? +process.env.WSS_PORT : 8080;
 
 console.log(`Start static http server on the ${HTTP_PORT} port!`);
 httpServer.listen(HTTP_PORT);
@@ -20,7 +22,6 @@ wss.on('connection', function connection(ws) {
   duplex.on('data', async (data) => {
     const splitData: string[] = data.split(' ');
     const [command, ...args] = splitData;
-    console.log(splitData);
     const action = findCommand(command);
     if (typeof action !== 'string') {
       await action(args, duplex);
@@ -28,4 +29,13 @@ wss.on('connection', function connection(ws) {
       console.log(action);
     }
   });
+});
+
+process.on('SIGINT', () => {
+  wss.clients.forEach((connect) => {
+    connect.close();
+  });
+  wss.close();
+  console.log(`\nDisconnect websocket connection on port ${SERVER_PORT}`);
+  process.exit();
 });
